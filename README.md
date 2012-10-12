@@ -11,6 +11,15 @@ Use it like every other css resource reference:
     }
 ```
 
+You can simply Unit-Test your script:
+
+```java
+	@Test
+    public void test() {
+        LessCompiler.INSTANCE.compile(new LessCssSource(Foo.class, "Bar.less"));
+    }
+```    
+
 Caching
 ----------
 At the moment we're using Wicket's ResourceReferenceRegistry for caching, but only if you are in Deployment mode. ResourceReferenceRegistry supports max 1000 of all resources by default! In development mode LessCss resource will be compiled on each request.
