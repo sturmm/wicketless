@@ -7,7 +7,7 @@ Use it like every other css resource reference:
 ```java
 	public void renderHead(IHeaderResponse response) {
 		...
-	    response.renderCSSReference(new LessCssResourceReference(LessCompiler.class, "HomePage.less"));
+	    response.renderCSSReference(new LessCssResourceReference(HomePage.class, "HomePage.less"));
     }
 ```
 
