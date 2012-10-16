@@ -5,19 +5,19 @@ wicketless
 
 Use it like every other css resource reference:
 ```java
-	public void renderHead(IHeaderResponse response) {
-		...
-	    response.renderCSSReference(new LessCssResourceReference(HomePage.class, "HomePage.less"));
-    }
+public void renderHead(IHeaderResponse response) {
+	...
+	response.renderCSSReference(new LessCssResourceReference(HomePage.class, "HomePage.less"));
+}
 ```
 
 You can simply Unit-Test your script:
 
 ```java
-	@Test
-    public void test() {
-        LessParser.INSTANCE.parse(new LessSource(Foo.class, "Bar.less"));
-    }
+@Test
+public void test() {
+	LessParser.INSTANCE.parse(new LessSource(Foo.class, "Bar.less"));
+}
 ```    
 
 Meaningfull Error Messages
@@ -46,12 +46,12 @@ At the moment we're using Wicket's ResourceReferenceRegistry for caching, but on
 
 Or quite you use LessCssResourceReference as static constant, so it will be compiled only once, if you are in Deployment mode:
 ```java
-    private static final ResourceReference CSS = new LessCssResourceReference(HomePage.class, "HomePage.less");
+private static final ResourceReference CSS = new LessCssResourceReference(HomePage.class, "HomePage.less");
     
-	public void renderHead(IHeaderResponse response) {
-		...
-	    response.renderCSSReference(CSS);
-    }
+public void renderHead(IHeaderResponse response) {
+	...
+	response.renderCSSReference(CSS);
+}
 ```
 In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
 
