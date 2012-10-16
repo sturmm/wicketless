@@ -11,14 +11,45 @@ Use it like every other css resource reference:
     }
 ```
 
+If you use LessCssResourceReference as static constant it will be compiled only once, if you are in Deployment mode:
+```java
+    private static final ResourceReference CSS = new LessCssResourceReference(HomePage.class, "HomePage.less");
+    
+	public void renderHead(IHeaderResponse response) {
+		...
+	    response.renderCSSReference(CSS);
+    }
+```
+In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
+
 You can simply Unit-Test your script:
 
 ```java
 	@Test
     public void test() {
-        LessCompiler.INSTANCE.compile(new LessCssSource(Foo.class, "Bar.less"));
+        LessParser.INSTANCE.parse(new LessSource(Foo.class, "Bar.less"));
     }
 ```    
+
+Meaningfull Error Messages
+----------
+All errors are written printed as detailed as possible e.g:
+```
+org.sturmm.wicketless.less.ParsingError: { 
+	file: 'org/sturmm/wicketless/HomePage.less', 
+	message: org.sturmm.wicketless.less.ParsingError: { 
+		file: 'org/sturmm/wicketless/Import.less', 
+		error: { line:4, column: 5}, 
+		source:{ 
+			3 | 
+			4*| .fo(o(){
+			5 |  height: 15px;
+		},
+		message: expected ')' got '('
+	}
+}
+```
+It's tree like structure containing line, column and code extract for simply finding the problem.
 
 Caching
 ----------
@@ -31,6 +62,7 @@ We support two types of imports. At the one side you can add relative references
 ```lesscss
 @import "classpath:foo/bar/baz";
 @import "../foo/bar.less";
+@import "foo/bar.less";
 ```
 
 As you can see you must not use the '.less' prefix. It's added automatically.

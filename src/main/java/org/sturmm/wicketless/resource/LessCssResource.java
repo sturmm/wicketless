@@ -1,71 +1,46 @@
 package org.sturmm.wicketless.resource;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-
 import org.apache.wicket.Application;
 import org.apache.wicket.request.resource.ByteArrayResource;
-import org.apache.wicket.request.resource.caching.IStaticCacheableResource;
-import org.apache.wicket.util.io.IOUtils;
-import org.apache.wicket.util.resource.AbstractResourceStream;
-import org.apache.wicket.util.resource.IResourceStream;
-import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
-import org.sturmm.wicketless.less.LessCssSource;
+import org.sturmm.wicketless.less.LessSource;
 
-public class LessCssResource extends ByteArrayResource implements IStaticCacheableResource{
+public class LessCssResource extends ByteArrayResource
+{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private final LessCssSource source;
+	private final LessSource source;
 
-    public LessCssResource(Class<?> scope, String name) {
-        super("text/css");
-        source = new LessCssSource(scope, name){
-            @Override
-            public boolean isCompressed() {
-                return Application.get().usesDeploymentConfig();
-            }
-        };
-    }
+	public LessCssResource(Class<?> scope, String name)
+	{
+		super("text/css");
+		source = new LessSource(scope, name)
+		{
+			private static final long serialVersionUID = 1L;
 
-    @Override
-    protected byte[] getData(final Attributes attributes) {
-        return source.getCompiledSource().getBytes();
-    }
+			@Override
+			public boolean isCompressed()
+			{
+				return Application.get().usesDeploymentConfig();
+			}
+		};
+	}
 
-    @Override
-    protected void configureResponse(ResourceResponse response, Attributes attributes) {
-        super.configureResponse(response, attributes);
-        response.setCacheDurationToMaximum();
-    }
+	@Override
+	protected byte[] getData(final Attributes attributes)
+	{
+		return source.toCSS().getBytes();
+	}
 
-    @Override
-    public Serializable getCacheKey() {
-        return source.getFilename();
-    }
+	@Override
+	protected void configureResponse(ResourceResponse response, Attributes attributes)
+	{
+		super.configureResponse(response, attributes);
+		response.setCacheDurationToMaximum();
+	}
 
-    @Override
-    public IResourceStream getCacheableResourceStream() {
-        return new AbstractResourceStream() {
-            private static final long serialVersionUID = 1L;
-
-            private InputStream is;
-            
-            @Override
-            public InputStream getInputStream() throws ResourceStreamNotFoundException {
-                if(is == null){
-                    is = new ByteArrayInputStream(source.getCompiledSource().getBytes());
-                }
-                return is;
-            }
-            
-            @Override
-            public void close() throws IOException {
-                IOUtils.close(is);
-            }
-        };
-    }
-
+	public LessSource getSource()
+	{
+		return source;
+	}
 }
