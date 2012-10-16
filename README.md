@@ -1,7 +1,7 @@
 wicketless
 ==========
 
-LessCSS integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress.
+{less} (see http://www.lesscss.org for more information) integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress.
 
 Use it like every other css resource reference:
 ```java
@@ -10,17 +10,6 @@ Use it like every other css resource reference:
 	    response.renderCSSReference(new LessCssResourceReference(HomePage.class, "HomePage.less"));
     }
 ```
-
-If you use LessCssResourceReference as static constant it will be compiled only once, if you are in Deployment mode:
-```java
-    private static final ResourceReference CSS = new LessCssResourceReference(HomePage.class, "HomePage.less");
-    
-	public void renderHead(IHeaderResponse response) {
-		...
-	    response.renderCSSReference(CSS);
-    }
-```
-In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
 
 You can simply Unit-Test your script:
 
@@ -33,10 +22,10 @@ You can simply Unit-Test your script:
 
 Meaningfull Error Messages
 ----------
-All errors are written printed as detailed as possible e.g:
+Error messages are printed as detailed as possible e.g:
 ```
 org.sturmm.wicketless.less.ParsingError: { 
-	file: 'org/sturmm/wicketless/HomePage.less', 
+	file: 'org/sturmm/wicketless/Foo.less', 
 	message: org.sturmm.wicketless.less.ParsingError: { 
 		file: 'org/sturmm/wicketless/Import.less', 
 		error: { line:4, column: 5}, 
@@ -49,11 +38,22 @@ org.sturmm.wicketless.less.ParsingError: {
 	}
 }
 ```
-It's tree like structure containing line, column and code extract for simply finding the problem.
+It's tree like structure containing line, column and code extract for simply finding and solving issues.
 
 Caching
 ----------
 At the moment we're using Wicket's ResourceReferenceRegistry for caching, but only if you are in Deployment mode. ResourceReferenceRegistry supports max 1000 of all resources by default! In development mode LessCss resource will be compiled on each request.
+
+Or quite you use LessCssResourceReference as static constant, so it will be compiled only once, if you are in Deployment mode:
+```java
+    private static final ResourceReference CSS = new LessCssResourceReference(HomePage.class, "HomePage.less");
+    
+	public void renderHead(IHeaderResponse response) {
+		...
+	    response.renderCSSReference(CSS);
+    }
+```
+In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
 
 Less Imports
 ----------
