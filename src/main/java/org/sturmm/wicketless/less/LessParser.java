@@ -1,6 +1,6 @@
 package org.sturmm.wicketless.less;
 
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.apache.wicket.util.string.AppendingStringBuffer;
@@ -21,7 +21,7 @@ public final class LessParser
 {
 
 	private static Logger LOG = LoggerFactory.getLogger(LessParser.class);
-	
+
 	/**
 	 * Singleton instance of {@link LessParser}.
 	 */
@@ -41,9 +41,11 @@ public final class LessParser
 	{
 		try
 		{
-			Reader lesscss = new FileReader(LessParser.class.getResource("less-1.3.0.js").getPath());
-
 			Context ctx = Context.enter();
+
+			Reader lesscss = new InputStreamReader(
+					LessParser.class.getResourceAsStream("less-1.3.0.js"));
+
 			ctx.setOptimizationLevel(9);
 
 			Global global = new Global();
