@@ -2,7 +2,8 @@ package org.sturmm.wicketless.resource;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.request.resource.ByteArrayResource;
-import org.sturmm.wicketless.less.LessSource;
+import org.sturmm.wicketless.less.source.ClasspathLessSource;
+import org.sturmm.wicketless.less.source.LessSource;
 
 public class LessCssResource extends ByteArrayResource
 {
@@ -14,7 +15,7 @@ public class LessCssResource extends ByteArrayResource
 	public LessCssResource(Class<?> scope, String name)
 	{
 		super("text/css");
-		source = new LessSource(scope, name)
+		source = new ClasspathLessSource(scope, name)
 		{
 			private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,6 @@
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.less.source;
+
+import org.sturmm.wicketless.less.AbstractLessException;
 
 public class ResourceException extends AbstractLessException
 {

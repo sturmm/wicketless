@@ -1,8 +1,9 @@
 package org.sturmm.wicketless;
 
 import org.junit.Test;
-import org.sturmm.wicketless.less.LessSource;
-import org.sturmm.wicketless.less.ParsingError;
+import org.sturmm.wicketless.less.parser.ParsingError;
+import org.sturmm.wicketless.less.source.ClasspathLessSource;
+import org.sturmm.wicketless.less.source.LessSource;
 
 public class CompileTest
 {
@@ -10,7 +11,7 @@ public class CompileTest
 	@Test(expected = ParsingError.class)
 	public void homepageRendersSuccessfully()
 	{
-		LessSource file = new LessSource(CompileTest.class, "HomePage.less");
+		LessSource file = new ClasspathLessSource(CompileTest.class, "HomePage.less");
 		try
 		{
 			file.toCSS();

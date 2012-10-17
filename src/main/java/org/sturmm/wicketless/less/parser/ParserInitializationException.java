@@ -1,4 +1,6 @@
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.less.parser;
+
+import org.sturmm.wicketless.less.AbstractLessException;
 
 class ParserInitializationException extends AbstractLessException
 {

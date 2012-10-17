@@ -1,6 +1,6 @@
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.less.parser;
 
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.apache.wicket.util.string.AppendingStringBuffer;
@@ -11,6 +11,8 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.tools.shell.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sturmm.wicketless.less.source.ClasspathLessSource;
+import org.sturmm.wicketless.less.source.LessSource;
 
 /**
  * Adapter to less.js parser/compiler using Mozilla's Rhino engine.
@@ -41,24 +43,27 @@ public final class LessParser
 	{
 		try
 		{
-			Reader lesscss = new FileReader(LessParser.class.getResource("less-1.3.0.js").getPath());
+			LOG.debug("Initializing LessParser ...");
+            Context ctx = Context.enter();
+            
+            Reader lesscss = new InputStreamReader(LessParser.class.getResourceAsStream("less-1.3.0.js"));
 
-			Context ctx = Context.enter();
-			ctx.setOptimizationLevel(9);
+            ctx.setOptimizationLevel(9);
 
-			Global global = new Global();
-			global.init(ctx);
+            Global global = new Global();
+            global.init(ctx);
 
 			jsScope = ctx.initStandardObjects(global);
-
+			
 			Object $logger = Context.javaToJS(LOG, jsScope);
 			ScriptableObject.putProperty(jsScope, "LessCompiler", $logger);
-
+			
 			ctx.evaluateString(jsScope, ScriptFunctions.browser, "browser.js", 1, null);
 			ctx.evaluateReader(jsScope, lesscss, "less-1.3.0.js", 1, null);
 			ctx.evaluateString(jsScope, ScriptFunctions.importer, "importer.js", 1, null);
 
 			parserJs = ctx.compileFunction(jsScope, ScriptFunctions.parser, "parser.js", 1, null);
+			LOG.debug("... parser initialization successfull!");
 		}
 		catch (Throwable t)
 		{
@@ -66,7 +71,11 @@ public final class LessParser
 		}
 		finally
 		{
+			try{
 			Context.exit();
+			} catch(Exception e){
+				LOG.warn("Exception raised while exiting context.",e);
+			}
 		}
 	}
 
@@ -76,7 +85,7 @@ public final class LessParser
 	 * 
 	 * @param file
 	 *            , wrapper for .less file
-	 * @return the AST of {@link LessSource} wrapped in {@link Scriptable}
+	 * @return the AST of {@link ClasspathLessSource} wrapped in {@link Scriptable}
 	 * @throws ParsingError
 	 *             if parsing of source file fails
 	 */

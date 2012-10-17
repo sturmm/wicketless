@@ -1,10 +1,11 @@
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.less.parser;
 
 import static org.mozilla.javascript.ScriptableObject.getTypedProperty;
 
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.json.JsonParser;
+import org.sturmm.wicketless.less.AbstractLessException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -16,7 +16,7 @@ You can simply Unit-Test your script:
 ```java
 @Test
 public void test() {
-	LessParser.INSTANCE.parse(new LessSource(Foo.class, "Bar.less"));
+	new LessSource(Foo.class, "Bar.less").toCSS();
 }
 ```    
 
@@ -65,7 +65,7 @@ We support two types of imports. At the one side you can add relative references
 @import "foo/bar.less";
 ```
 
-As you can see you must not use the '.less' prefix. It's added automatically.
+As you can see in first line you must not use the '.less' prefix. It's added automatically.
 
 Build
 ----------
