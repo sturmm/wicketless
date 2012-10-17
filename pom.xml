@@ -11,7 +11,7 @@
   <!-- TODO <organization> <name>company name</name> <url>company url</url> 
     </organization> -->
   <properties>
-    <wicket.version>1.5.8</wicket.version>
+    <wicket.version>6.1.1</wicket.version>
   </properties>
   <dependencies>
     <!-- WICKET DEPENDENCIES -->
