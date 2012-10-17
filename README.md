@@ -59,7 +59,7 @@ Adopt the framework for your needs. Provide your way for loading less sources (e
 ```java
 public class DbLessSource extends AbstractLessSource
 {
-
+	...
 	@Override
 	public LessSource resolveImport(String filename)
 	{
