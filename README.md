@@ -101,7 +101,7 @@ public void renderHead(IHeaderResponse response) {
 	response.renderCSSReference(CSS);
 }
 ```
-In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
+In development mode the LessResource will be instantiated new for each request, so that you can see changes immediately.
 
 
 Build
