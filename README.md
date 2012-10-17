@@ -20,7 +20,7 @@ public void test() {
 }
 ```    
 
-Meaningfull Error Messages
+Meaningfull Errors
 ----------
 Error messages are printed as detailed as possible e.g:
 ```
@@ -52,9 +52,9 @@ We support two types of imports. At the one side you can add relative references
 
 As you can see in first line you must not use the '.less' prefix. It's added automatically.
 
-Simply adaptable
+Simple Customization
 ----------
-Simply define connect your own way for loading less souces  (e.g. database, cms, http ...) by extending AbstractLessSource:
+Adopt the framework for your needs. Provide your way for loading less sources (e.g. database, cms, http ...) by extending AbstractLessSource:
 
 ```java
 public class DbLessSource extends AbstractLessSource
@@ -112,12 +112,7 @@ TODO
 ----------
 
 Still under development. 
-- extract less compiler in extra project
-- Add css-import support
-- Caching
-- Cleanup
-- Documentation
-- UnitTests 
+- more Caching
 - Wicket 6 support
 - release
 
