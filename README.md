@@ -1,7 +1,7 @@
 wicketless
 ==========
 
-{less} (see http://www.lesscss.org for more information) integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress.
+{less} (see http://www.lesscss.org for more information) integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress. Wicket 6 might work, but is still untested.
 
 Use it like every other css resource reference:
 ```java
@@ -86,7 +86,6 @@ public class DbLessSource extends AbstractLessSource
 
 }
 ``` 
-
 
 Caching
 ----------
