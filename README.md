@@ -40,6 +40,54 @@ org.sturmm.wicketless.less.ParsingError: {
 ```
 It's tree like structure containing line, column and code extract for simply finding and solving issues.
 
+Less Imports
+----------
+We support two types of imports. At the one side you can add relative references to your less code and at the other hand you can specify an import by using the fully qualified name of a classpath resource by adding 'classpath:' as prefix:
+
+```lesscss
+@import "classpath:foo/bar/baz";
+@import "../foo/bar.less";
+@import "foo/bar.less";
+```
+
+As you can see in first line you must not use the '.less' prefix. It's added automatically.
+
+Simply adaptable
+----------
+Simply define connect your own way for loading less souces  (e.g. database, cms, http ...) by extending AbstractLessSource:
+
+```java
+public class DbLessSource extends AbstractLessSource
+{
+
+	@Override
+	public LessSource resolveImport(String filename)
+	{
+		return new DbLessSource(filename);
+	}
+
+	@Override
+	public String getFilename()
+	{
+		return filename;
+	}
+
+	@Override
+	public String getSource()
+	{
+		return service.loadSourceById(filename);
+	}
+
+	@Override
+	public boolean isCompressed()
+	{
+		return false;
+	}
+
+}
+`` 
+
+
 Caching
 ----------
 At the moment we're using Wicket's ResourceReferenceRegistry for caching, but only if you are in Deployment mode. ResourceReferenceRegistry supports max 1000 of all resources by default! In development mode LessCss resource will be compiled on each request.
@@ -55,17 +103,6 @@ public void renderHead(IHeaderResponse response) {
 ```
 In development mode the LessResource will be instantiated new for each request, so that you can see your changes immediately.
 
-Less Imports
-----------
-We support two types of imports. At the one side you can add relative references to your less code and at the other hand you can specify an import by using the fully qualified name of a classpath resource by adding 'classpath:' as prefix:
-
-```lesscss
-@import "classpath:foo/bar/baz";
-@import "../foo/bar.less";
-@import "foo/bar.less";
-```
-
-As you can see in first line you must not use the '.less' prefix. It's added automatically.
 
 Build
 ----------
