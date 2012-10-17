@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.sturmm.wicketless.less.parser;
 
 import java.io.InputStreamReader;
@@ -23,7 +39,7 @@ public final class LessParser
 {
 
 	private static Logger LOG = LoggerFactory.getLogger(LessParser.class);
-	
+
 	/**
 	 * Singleton instance of {@link LessParser}.
 	 */
@@ -44,20 +60,21 @@ public final class LessParser
 		try
 		{
 			LOG.debug("Initializing LessParser ...");
-            Context ctx = Context.enter();
-            
-            Reader lesscss = new InputStreamReader(LessParser.class.getResourceAsStream("less-1.3.0.js"));
+			Context ctx = Context.enter();
 
-            ctx.setOptimizationLevel(9);
+			Reader lesscss = new InputStreamReader(
+					LessParser.class.getResourceAsStream("less-1.3.0.js"));
 
-            Global global = new Global();
-            global.init(ctx);
+			ctx.setOptimizationLevel(1);
+
+			Global global = new Global();
+			global.init(ctx);
 
 			jsScope = ctx.initStandardObjects(global);
-			
+
 			Object $logger = Context.javaToJS(LOG, jsScope);
-			ScriptableObject.putProperty(jsScope, "LessCompiler", $logger);
-			
+			ScriptableObject.putProperty(jsScope, "log", $logger);
+
 			ctx.evaluateString(jsScope, ScriptFunctions.browser, "browser.js", 1, null);
 			ctx.evaluateReader(jsScope, lesscss, "less-1.3.0.js", 1, null);
 			ctx.evaluateString(jsScope, ScriptFunctions.importer, "importer.js", 1, null);
@@ -71,10 +88,13 @@ public final class LessParser
 		}
 		finally
 		{
-			try{
-			Context.exit();
-			} catch(Exception e){
-				LOG.warn("Exception raised while exiting context.",e);
+			try
+			{
+				Context.exit();
+			}
+			catch (Exception e)
+			{
+				LOG.warn("Exception raised while exiting context.", e);
 			}
 		}
 	}
@@ -85,7 +105,8 @@ public final class LessParser
 	 * 
 	 * @param file
 	 *            , wrapper for .less file
-	 * @return the AST of {@link ClasspathLessSource} wrapped in {@link Scriptable}
+	 * @return the AST of {@link ClasspathLessSource} wrapped in
+	 *         {@link Scriptable}
 	 * @throws ParsingError
 	 *             if parsing of source file fails
 	 */
@@ -151,7 +172,9 @@ public final class LessParser
 			asb = new AppendingStringBuffer();
 			asb.append("window.less.Parser.importer = function(path2import, paths, fn, env) {\n");
 			asb.append("  var imported = env.rootfile.resolveImport(path2import);\n");
-			asb.append("  fn({}, imported.getAST(), String(imported.getSource()));\n");
+			asb.append("  var ast = imported.getAST();\n");
+			asb.append("  var source = imported.getSource();\n");
+			asb.append("  fn(null, ast, String(source));\n");
 			asb.append("};\n");
 			importer = asb.toString();
 
