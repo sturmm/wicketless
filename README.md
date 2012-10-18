@@ -1,9 +1,6 @@
 wicketless
 ==========
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-via="RoadRunner12048" data-lang="de" data-size="large" data-dnt="true">Twittern</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
 {less} (see http://www.lesscss.org for more information) integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress. Wicket 6 might work, but is still untested.
 
 Use it like every other css resource reference:
