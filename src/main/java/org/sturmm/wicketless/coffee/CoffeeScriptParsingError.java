@@ -14,24 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.sturmm.wicketless.less.parser;
-
-import org.sturmm.wicketless.less.AbstractLessException;
+package org.sturmm.wicketless.coffee;
 
 /**
- * 
- * This exception will be thrown if any error occurs while configuring the
- * javascript engine and it's environment for using the less.js compile script.
+ * This exception will be thrown if any error occurs during parsing of
+ * CoffeeScript sources.
  * 
  * @author Martin Sturm
- * 
  */
-public class ParserInitializationException extends AbstractLessException
+public class CoffeeScriptParsingError extends AbstractCoffeeScriptException
 {
-	private static final long serialVersionUID = 1L;
 
-	public ParserInitializationException(String msg, Throwable cause)
+	public CoffeeScriptParsingError(String msg, Throwable cause)
 	{
 		super(msg, cause);
 	}
+
 }

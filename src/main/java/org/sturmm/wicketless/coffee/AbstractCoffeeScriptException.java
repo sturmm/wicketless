@@ -14,34 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.coffee;
 
 /**
- * 
- * This is the super class for all Exceptions of Less parsing/css creation.
+ * This is the super class for all Exceptions of CoffeeScript parsing/js
+ * creation.
  * 
  * @author Martin Sturm
  * 
  */
-public abstract class AbstractLessException extends RuntimeException
+public abstract class AbstractCoffeeScriptException extends RuntimeException
 {
 
-	public AbstractLessException()
+	public AbstractCoffeeScriptException()
 	{
 		super();
 	}
 
-	public AbstractLessException(String msg, Throwable cause)
+	public AbstractCoffeeScriptException(String msg, Throwable cause)
 	{
 		super(msg, cause);
 	}
 
-	public AbstractLessException(String msg)
+	public AbstractCoffeeScriptException(String msg)
 	{
 		super(msg);
 	}
 
-	public AbstractLessException(Throwable cause)
+	public AbstractCoffeeScriptException(Throwable cause)
 	{
 		super(cause);
 	}

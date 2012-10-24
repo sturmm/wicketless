@@ -14,36 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.sturmm.wicketless.less;
+package org.sturmm.wicketless.less.parser;
+
+import org.sturmm.wicketless.less.AbstractLessException;
 
 /**
  * 
- * This is the super class for all Exceptions of Less parsing/css creation.
+ * This exception will be thrown if any error occurs while configuring the
+ * javascript engine and it's environment for using the less.js compile script.
  * 
  * @author Martin Sturm
  * 
  */
-public abstract class AbstractLessException extends RuntimeException
+public class LessParserInitializationException extends AbstractLessException
 {
 
-	public AbstractLessException()
-	{
-		super();
-	}
-
-	public AbstractLessException(String msg, Throwable cause)
+	public LessParserInitializationException(String msg, Throwable cause)
 	{
 		super(msg, cause);
-	}
-
-	public AbstractLessException(String msg)
-	{
-		super(msg);
-	}
-
-	public AbstractLessException(Throwable cause)
-	{
-		super(cause);
 	}
 
 }

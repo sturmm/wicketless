@@ -30,26 +30,26 @@ import org.sturmm.wicketless.less.AbstractLessException;
  * @author Martin Sturm
  * 
  */
-public class ParsingError extends AbstractLessException
+public class LessParsingError extends AbstractLessException
 {
 	private static final long serialVersionUID = 26016767918781830L;
 
-	public ParsingError()
+	public LessParsingError()
 	{
 		super();
 	}
 
-	public ParsingError(String msg, Throwable cause)
+	public LessParsingError(String msg, Throwable cause)
 	{
 		super(msg, cause);
 	}
 
-	public ParsingError(String msg)
+	public LessParsingError(String msg)
 	{
 		super(msg);
 	}
 
-	public ParsingError(Throwable cause)
+	public LessParsingError(Throwable cause)
 	{
 		super(cause);
 	}

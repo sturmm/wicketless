@@ -22,6 +22,7 @@ import java.net.URL;
 
 import org.apache.wicket.util.io.IOUtils;
 import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.util.lang.Packages;
 
 /**
  * Implementation of {@link LessSource} which provides loading and importing
@@ -56,7 +57,7 @@ public class ClasspathLessSource extends AbstractLessSource implements LessSourc
 	 */
 	public ClasspathLessSource(Class<?> scope, String filename) throws ResourceException
 	{
-		this(scope.getPackage().getName().replace(".", "/") + "/" + filename);
+		this(Packages.absolutePath(scope, filename));
 	}
 
 	/**

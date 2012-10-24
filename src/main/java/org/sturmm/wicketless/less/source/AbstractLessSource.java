@@ -22,7 +22,7 @@ import static org.mozilla.javascript.ScriptableObject.putProperty;
 import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.Scriptable;
 import org.sturmm.wicketless.less.parser.LessParser;
-import org.sturmm.wicketless.less.parser.ParsingError;
+import org.sturmm.wicketless.less.parser.LessParsingError;
 
 /**
  * This Class provides the basic functinality that is needed for using with
@@ -80,7 +80,7 @@ public abstract class AbstractLessSource implements LessSource
 			}
 			catch (Exception e)
 			{
-				throw new ParsingError("Unable to generate CSS" + this.getFilename(), e);
+				throw new LessParsingError("Unable to generate CSS" + this.getFilename(), e);
 			}
 		}
 		return css;

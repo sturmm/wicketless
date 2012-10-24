@@ -52,7 +52,7 @@ public class ParserTest
 		assertEquals(expectedResult, src.toCSS());
 	}
 
-	@Test(expected = ParsingError.class)
+	@Test(expected = LessParsingError.class)
 	public void parseAndError()
 	{
 		compressed = true;

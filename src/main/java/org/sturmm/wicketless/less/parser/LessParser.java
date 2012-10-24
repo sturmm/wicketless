@@ -52,7 +52,7 @@ public final class LessParser
 	 * Privat Constructor of {@link LessParser} which initiates a Rhino
 	 * javascript context with less.js environment and needed funtions.
 	 * 
-	 * @throws ParserInitializationException
+	 * @throws LessParserInitializationException
 	 *             is parser could'nt be initialized.
 	 */
 	private LessParser()
@@ -84,7 +84,7 @@ public final class LessParser
 		}
 		catch (Throwable t)
 		{
-			throw new ParserInitializationException("Unable to initialize LessCompiler scope.", t);
+			throw new LessParserInitializationException("Unable to initialize LessCompiler scope.", t);
 		}
 		finally
 		{
@@ -107,7 +107,7 @@ public final class LessParser
 	 *            , wrapper for .less file
 	 * @return the AST of {@link ClasspathLessSource} wrapped in
 	 *         {@link Scriptable}
-	 * @throws ParsingError
+	 * @throws LessParsingError
 	 *             if parsing of source file fails
 	 */
 	public final Scriptable parse(LessSource file)
@@ -119,13 +119,13 @@ public final class LessParser
 		}
 		catch (Exception e)
 		{
-			throw new ParsingError("Unable to compile less file " + file.getFilename(), e);
+			throw new LessParsingError("Unable to parse less file " + file.getFilename(), e);
 		}
 	}
 
 	/**
 	 * Returns a singleton instance of {@link LessParser}. Might throw
-	 * {@link ParserInitializationException} if parser could not be initialized.
+	 * {@link LessParserInitializationException} if parser could not be initialized.
 	 * 
 	 * @return parser as singleton
 	 */
