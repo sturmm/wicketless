@@ -1,13 +1,25 @@
 wicketless
 ==========
 
-{less} (see http://www.lesscss.org for more information) integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress. Wicket 6 might work, but is still untested.
+<a href="http://www.lesscss.org/">Less</a> and <a href="http://coffeescript.org/">CoffeeScript</a> integration for Wicket 1.5. using Mozilla's Rhino engine for runtime less compilation. Other wicket versions are in Progress. Wicket 6 might work, but is still untested.
 
 Use it like every other css resource reference:
+
+Wicket 1.5 (used for this impl.):
 ```java
 public void renderHead(IHeaderResponse response) {
 	...
 	response.renderCSSReference(new LessCssResourceReference(HomePage.class, "HomePage.less"));
+	response.renderJavaScriptReference(new CoffeeScriptResourceReference(HomePage.class, "HomePage.cs"));
+}
+```
+
+Wicket 6.2 (update of pom.xml needed - untested):
+```java
+public void renderHead(IHeaderResponse response) {
+	...
+	response.render(CssHeaderItem.forReference(new LessCssResourceReference(HomePage.class, "HomePage.less")));
+	response.render(JavaScriptHeaderItem.forReference(new CoffeeScriptResourceReference(HomePage.class, "HomePage.cs")));
 }
 ```
 
