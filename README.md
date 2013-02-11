@@ -121,7 +121,8 @@ TODO
 
 Still under development. 
 - more Caching
-- Wicket 6 support
+- (official) Wicket 6 support
+- ResourceStream Locator
 - release
 
 License
